@@ -1,6 +1,6 @@
 //add dey
 
-import { aoc } from './2Day1/Part2';
+import { aoc } from './2Day1/Part1';
 
 const textInput = document.getElementById('day') as HTMLInputElement;
 const swapButton = document.getElementById('swap') as HTMLButtonElement;
