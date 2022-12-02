@@ -1,54 +1,45 @@
-//add dey
+import { readFileSync } from 'fs';
+import { logError, logHighlight, logSuccess } from '../../functions/log';
+const log = console.log;
 
-import { aoc } from './2Day1/Day1';
+export function part1(input: string): string | number {
+  const calories = getCalories(input);
+  return Math.max(...calories);
+}
 
-const textInput = document.getElementById('day') as HTMLInputElement;
-const swapButton = document.getElementById('swap') as HTMLButtonElement;
-const loadButton = document.getElementById('load') as HTMLButtonElement;
-const solutionSpan = document.getElementById('solution') as HTMLSpanElement;
-const buttonTextSpan = document.getElementById('test') as HTMLSpanElement;
+export function part2(input: string): string | number {
+  const calories = getCalories(input);
+  return calories.sort((a, b) => b - a).slice(0, 3).reduce((prev, curr) => prev + curr, 0);
+}
 
-let day: number;
-let part = 1;
+function getCalories(input: string): number[] {
+  const elves = splitInput(input);
+  const calories = elves.map((e) =>
+    e
+      .split(/\r?\n/)
+      .map((c) => parseInt(c))
+      .reduce((prev, curr) => prev + curr, 0)
+  );
+  return calories;
+}
 
-buttonTextSpan.innerHTML = 'TEST, Part 1';
+function splitInput(input: string): string[] {
+  return input.split(/\r?\n\r?\n/);
+}
 
-loadButton.addEventListener('click', () => {
-  day = parseInt(textInput.value);
-});
+try {
+  const input = readFileSync('./2022/01/input.txt', 'utf-8');
+  const solution1 = part1(input);
+  const solution2 = part2(input);
 
-swapButton.addEventListener('click', () => {
-  part++;
-  load();
-});
+  logHighlight('*** Day 01 ***');
+  console.time('Duration part 1');
+  logSuccess('Part 1:', solution1);
+  console.timeEnd('Duration part 1');
 
-function load() {
-  part === 5 ? (part = 1) : (part = part);
-  let aoctest: boolean;
-  let aocpart: boolean;
-  let partString: string;
-  switch (part) {
-    case 1:
-      aoctest = true;
-      aocpart = false;
-      partString = 'TEST, Part 1';
-      break;
-    case 2:
-      aoctest = false;
-      aocpart = false;
-      partString = 'NORMAL, Part 1';
-      break;
-    case 3:
-      aoctest = true;
-      aocpart = true;
-      partString = 'TEST, Part 2';
-      break;
-    case 4:
-      aoctest = false;
-      aocpart = true;
-      partString = 'NORMAL, Part 2';
-      break;
-  }
-  buttonTextSpan.innerHTML = String(partString);
-  solutionSpan.innerHTML = String(aoc(aocpart, aoctest));
+  console.time('Duration part 2');
+  logSuccess('Part 2:', solution2);
+  console.timeEnd('Duration part 2');
+} catch (e: any) {
+  logError(e);
 }
