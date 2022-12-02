@@ -1,6 +1,6 @@
 //add dey
 
-import { aoc } from './2Day1/Part1';
+import { aoc } from './2Day1/Day1';
 
 const textInput = document.getElementById('day') as HTMLInputElement;
 const swapButton = document.getElementById('swap') as HTMLButtonElement;
@@ -11,12 +11,12 @@ const buttonTextSpan = document.getElementById('test') as HTMLSpanElement;
 let day: number;
 let part = 1;
 
-buttonTextSpan.innerHTML = 'click LOAD';
+buttonTextSpan.innerHTML = 'TEST, Part 1';
+
 loadButton.addEventListener('click', () => {
   day = parseInt(textInput.value);
-  //console.log(day);
-  load();
 });
+
 swapButton.addEventListener('click', () => {
   part++;
   load();

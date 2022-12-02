@@ -15,6 +15,10 @@ export function getTestInput(): string {
   10000`;
 }
 
-export function getTestSolution(): string {
+export function getTestSolution1(): string {
+  return `24000`;
+}
+
+export function getTestSolution2(): string {
   return `45000`;
 }
