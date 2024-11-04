@@ -1,6 +1,30 @@
 {
-  "name": "typescript",
+  "name": "advent-of-code",
   "version": "0.0.0",
   "private": true,
-  "dependencies": {}
+  "description": "[Edit on StackBlitz ⚡️](https://stackblitz.com/edit/advent-of-code-benjamin)",
+  "main": "index.ts",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BenjaminDerProgrammierer/advent-of-code.git"
+  },
+  "keywords": [
+    "advent-of-code",
+    "aoc",
+    "typescript"
+  ],
+  "author": "@BenjaminDerProgrammierer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BenjaminDerProgrammierer/advent-of-code/issues"
+  },
+  "homepage": "https://github.com/BenjaminDerProgrammierer/advent-of-code#readme",
+  "dependencies": {
+    "typescript": "^4.4.4"
+  },
+  "devDependencies": {}
 }
