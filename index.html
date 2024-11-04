@@ -1,16 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta
+      name="description"
+      content="Advent of Code solutions and challenges"
+    />
+    <meta
+      name="keywords"
+      content="Advent of Code, programming, coding, challenges, puzzles"
+    />
+    <meta name="author" content="@BenjaminDerProgrammierer" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#ffffff" />
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Advent of Code</title>
+    <link rel="stylesheet" href="styles/style.css" />
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
   </head>
   <body>
-    Day:
-    <input id="day" type="text" />
-    <button id="load">LOAD</button><br />
-    <button id="swap"><span id="test"></span></button> <br />
-    <span id="solution">Lösung wird generiert...</span>
+    <h1>Advent of Code</h1>
+    <div id="container">
+      <div id="controls">
+        <label for="year">
+          Year:
+          <input id="year" type="number" name="year" min="2015" max="2099" value="2015"/>
+        </label>
+        <label for="day">
+          Day:
+          <input id="day" type="number" name="day" min="1" max="25" value="1"/>
+        </label>
+        <label for="part">
+          Part:
+          <select id="part" name="part">
+            <option value="1" selected>1</option>
+            <option value="2">2</option>
+          </select>
+        </label>
+        <label for="test">
+          <input type="checkbox" name="test" id="test" /> Use test input
+        </label>
+        <input type="submit" value="Generate" />
+      </div>
+      <span id="solution">Lösung wird generiert...</span>
+    </div>
+    <script src="./dist/index.js"></script>
   </body>
 </html>

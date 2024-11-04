@@ -1,54 +1,73 @@
-//add dey
+// https://adventofcode.com/
 
-import { aoc } from './2Day1/Day1';
 
-const textInput = document.getElementById('day') as HTMLInputElement;
-const swapButton = document.getElementById('swap') as HTMLButtonElement;
-const loadButton = document.getElementById('load') as HTMLButtonElement;
-const solutionSpan = document.getElementById('solution') as HTMLSpanElement;
-const buttonTextSpan = document.getElementById('test') as HTMLSpanElement;
-
-let day: number;
-let part = 1;
-
-buttonTextSpan.innerHTML = 'TEST, Part 1';
-
-loadButton.addEventListener('click', () => {
-  day = parseInt(textInput.value);
-});
-
-swapButton.addEventListener('click', () => {
-  part++;
-  load();
-});
-
-function load() {
-  part === 5 ? (part = 1) : (part = part);
-  let aoctest: boolean;
-  let aocpart: boolean;
-  let partString: string;
-  switch (part) {
-    case 1:
-      aoctest = true;
-      aocpart = false;
-      partString = 'TEST, Part 1';
-      break;
-    case 2:
-      aoctest = false;
-      aocpart = false;
-      partString = 'NORMAL, Part 1';
-      break;
-    case 3:
-      aoctest = true;
-      aocpart = true;
-      partString = 'TEST, Part 2';
-      break;
-    case 4:
-      aoctest = false;
-      aocpart = true;
-      partString = 'NORMAL, Part 2';
-      break;
-  }
-  buttonTextSpan.innerHTML = String(partString);
-  solutionSpan.innerHTML = String(aoc(aocpart, aoctest));
+const elements = {
+  year: document.getElementById('year') as HTMLInputElement, // number input
+  day: document.getElementById('day') as HTMLInputElement, // number input
+  part: document.getElementById('part') as HTMLInputElement, // Radio input
+  test: document.getElementById('test') as HTMLInputElement, // Checkbox
+  submit: document.querySelector("input[type='submit']") as HTMLInputElement, // Submit Button
+  solution: document.getElementById('solution') as HTMLSpanElement, // Text output
 }
+
+let day = 1;
+let part = 1;
+let test = false;
+let year = 2015;
+
+elements.year.addEventListener('input', () => {
+  if (elements.year.value == "") return;
+  if (Number(elements.year.value) > 2099) {
+    elements.year.value = '2099';
+  }
+  if (Number(elements.year.value) < 2015) {
+    elements.year.value = '2015';
+  }
+  year = Number(elements.year.value);
+});
+
+elements.day.addEventListener('input', () => {
+  if (elements.day.value == "") return;
+  if (Number(elements.day.value) > 25) {
+    elements.day.value = '25';
+  }
+  if (Number(elements.day.value) < 1) {
+    elements.day.value = '1';
+  }
+  day = Number(elements.day.value);
+});
+
+elements.part.addEventListener('input', () => {
+  part = Number(elements.part.value);
+});
+
+elements.test.addEventListener('input', () => {
+  test = elements.test.checked;
+});
+
+elements.submit.addEventListener('click', submit);
+
+function submit() {
+  console.log(`Year: ${year} Day: ${day}, Part: ${part}, Test: ${test}`);
+  //TODO: import both parts of the day, and the inputs, execute the correct part with the correct input and log the result
+  //TODO: catch error if the module is not found, just log it as not found and continue (execute as much as possible [input/testinput are only needed for their respective values of the test variable. the parts are only needed for their respective values of the part variable]) 
+}
+function getPath(year: number, day: number, part: number):
+{ input: string; testInput: string; testOutput: string; script: string; } {
+  return {
+    input: `./days/${year}/day${day}/input.in`,
+    testInput: `./days/${year}/day${day}/test.in`,
+    testOutput: `./days/${year}/day${day}/test.out`,
+    script: `./days/${year}/day${day}/day${day}.ts`,
+  }
+}
+
+let originalConsole = console;
+console = {
+  ...originalConsole,
+  log: function(...args: any[]) {
+    let text = args.join(' ');
+    elements.solution.innerHTML += `<br>${text}`;
+    originalConsole.log(text);
+  }
+};
